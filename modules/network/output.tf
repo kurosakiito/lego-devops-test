@@ -9,3 +9,11 @@ output "private_subnet_id" {
 output "target_group_arn" {
 	value = "${aws_lb_target_group.target_group.arn}"
 }
+
+output "hello_target_group_arn" {
+	value = "${aws_lb_target_group.hello.arn}"
+}
+
+output "text_target_group_arn" {
+	value = "${aws_lb_target_group.text.arn}"
+}

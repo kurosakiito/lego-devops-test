@@ -1,0 +1,41 @@
+[
+	{
+		"name": "nginx",
+		"image": "nginx:latest",
+	    "cpu": 10,
+	    "memory": 64,
+	    "essential": true,
+	    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      }
+    ]
+  },
+  {
+		"name": "hello",
+		"image": "tutum/hello-world:latest",
+	    "cpu": 10,
+	    "memory": 64,
+	    "essential": false,
+	    "portMappings": [
+      {
+        "containerPort": 81,
+        "hostPort": 81
+      }
+    ]
+  },
+  {
+		"name": "text",
+		"image": "nginxdemos/hello:plain-text",
+	    "cpu": 10,
+	    "memory": 64,
+	    "essential": false,
+	    "portMappings": [
+      {
+        "containerPort": 82,
+        "hostPort": 82
+      }
+    ]
+  }
+]

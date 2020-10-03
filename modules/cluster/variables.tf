@@ -1,4 +1,4 @@
-variable "aws_region" {}
+variable "region" {}
 
 variable "cluster_name" {}
 

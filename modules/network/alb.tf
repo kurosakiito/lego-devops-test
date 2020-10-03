@@ -17,6 +17,20 @@ resource "aws_lb_target_group" "target_group" {
   vpc_id   = "${aws_vpc.vpc.id}"
 }
 
+resource "aws_lb_target_group" "hello" {
+  name     = "${var.name}-target-group-hello"
+  port     = 81
+  protocol = "HTTP"
+  vpc_id   = "${aws_vpc.vpc.id}"
+}
+
+resource "aws_lb_target_group" "text" {
+  name     = "${var.name}-target-group-text"
+  port     = 82
+  protocol = "HTTP"
+  vpc_id   = "${aws_vpc.vpc.id}"
+}
+
 resource "aws_lb_listener" "alb_listener" {
   load_balancer_arn = "${aws_lb.alb.arn}"
   port              = "80"
@@ -24,6 +38,27 @@ resource "aws_lb_listener" "alb_listener" {
 
   default_action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.target_group.arn}"
+    forward {
+      target_group {
+        arn = "${aws_lb_target_group.target_group.arn}"
+        weight = 33
+      }
+
+      target_group {
+        arn = "${aws_lb_target_group.hello.arn}"
+        weight = 33 
+      }
+
+      target_group {
+        arn = "${aws_lb_target_group.text.arn}"
+        weight = 33
+      }
+
+      stickiness {
+        enabled  = false
+        duration = 1
+      }
+      
+    }
   }
 }
