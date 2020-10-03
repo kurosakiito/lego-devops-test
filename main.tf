@@ -13,6 +13,7 @@ module "ecs_cluster" {
   name = "${var.name}"
   security_group_id = ["${module.network.security_group_id}"]
   private_subnet_id = "${module.network.private_subnet_id}"
+  region = "${var.region}"
  }
 
 module "services" {
@@ -21,4 +22,6 @@ module "services" {
   name = "${var.name}"
   cluster_id = "${module.ecs_cluster.cluster_id}"
   target_group_arn = "${module.network.target_group_arn}"
+  hello_target_group_arn = "${module.network.hello_target_group_arn}"
+  text_target_group_arn = "${module.network.text_target_group_arn}"
 }
